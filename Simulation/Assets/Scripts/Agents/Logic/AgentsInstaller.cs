@@ -7,6 +7,7 @@ namespace GlassyCode.Simulation.Agents.Logic
     public sealed class AgentsInstaller : MonoInstaller
     {
         [field: SerializeField] public AgentsConfig Config { get; private set; }
+        [field: SerializeField] public Collider SpawnerArea { get; private set; }
         
         public override void InstallBindings()
         {
@@ -25,7 +26,7 @@ namespace GlassyCode.Simulation.Agents.Logic
             subContainer.Bind(typeof(AgentsSpawner), typeof(IAgentsSpawner), typeof(ITickable))
                 .To<AgentsSpawner>()
                 .AsSingle()
-                .WithArguments(Config.Spawner);
+                .WithArguments(Config.Spawner, SpawnerArea);
 
             subContainer.BindFactory<Object, AgentMono, AgentMono.Factory>().FromFactory<PrefabFactory<AgentMono>>();
         }
