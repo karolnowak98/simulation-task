@@ -19,7 +19,6 @@ namespace GlassyCode.Simulation.Map.Logic
         private void SetMapSize(Transform map)
         {
             var size = _config.Size;
-
             map.localScale = new Vector3(size.x, map.localScale.y, size.y);
         }
     }

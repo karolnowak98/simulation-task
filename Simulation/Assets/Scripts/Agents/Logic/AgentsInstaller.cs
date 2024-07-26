@@ -30,7 +30,7 @@ namespace GlassyCode.Simulation.Agents.Logic
                 .AsSingle()
                 .WithArguments(Config.Spawner, SpawnerArea);
 
-            subContainer.BindFactory<Object, AgentMono, AgentMono.Factory>().FromFactory<PrefabFactory<AgentMono>>();
+            subContainer.BindFactory<Object, Agent, Agent.Factory>().FromFactory<PrefabFactory<Agent>>();
         }
     }
 }
