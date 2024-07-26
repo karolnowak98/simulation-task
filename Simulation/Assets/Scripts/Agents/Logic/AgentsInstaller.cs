@@ -21,8 +21,10 @@ namespace GlassyCode.Simulation.Agents.Logic
 
         public void InstallAgents(DiContainer subContainer)
         {
-            //subContainer.Bind(typeof(AgentsManager)).AsSingle();
-
+            subContainer.Bind(typeof(AgentsManager), typeof(IAgentsManager), typeof(IInitializable))
+                .To<AgentsManager>()
+                .AsSingle();
+            
             subContainer.Bind(typeof(AgentsSpawner), typeof(IAgentsSpawner), typeof(ITickable))
                 .To<AgentsSpawner>()
                 .AsSingle()

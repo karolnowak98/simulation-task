@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Config>k__BackingField: {fileID: 11400000, guid: 09f4baeb3b193f043947220ca2f3855b, type: 2}
-  <SpawnerArea>k__BackingField: {fileID: 0}
+  <SpawnerArea>k__BackingField: {fileID: 2077430182}
 --- !u!114 &431785565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab1421c3690463ea2da86cf95017549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Config>k__BackingField: {fileID: 0}
-  <Map>k__BackingField: {fileID: 0}
+  <Config>k__BackingField: {fileID: 11400000, guid: a1dfec66eb0c52248a784190a751d03d, type: 2}
+  <Map>k__BackingField: {fileID: 1889700561}
 --- !u!1 &472949554
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,13 +714,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalPosition: {x: 0, y: 3.22, z: -6.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1889700561}
+  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
 --- !u!1 &1537685482
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +802,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 48dfaf49eeb744d4e9256626c614a5e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -842,7 +842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1889700561}
   m_Layer: 0
-  m_Name: AgentsSpawner
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -862,6 +862,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1537685483}
+  - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1993840502
@@ -1033,7 +1034,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077430180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1080,7 +1081,6 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 431785563}
   - {fileID: 1889700561}
