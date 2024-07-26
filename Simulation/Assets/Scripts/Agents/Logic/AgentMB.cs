@@ -9,7 +9,6 @@ namespace GlassyCode.Simulation.Agents.Logic
     {
         [field: SerializeField] public AgentData Data { get; private set; }
         
-        
         public sealed class Factory : PlaceholderFactory<Object, AgentMono>{ }
     }
 }

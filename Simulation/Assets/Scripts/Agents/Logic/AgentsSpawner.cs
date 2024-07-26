@@ -4,7 +4,7 @@ using Zenject;
 
 namespace GlassyCode.Simulation.Agents.Logic
 {
-    public sealed class AgentsSpawner : IAgentsSpawner, ITickable
+    public sealed class AgentsSpawner : IAgentsSpawner, IInitializable, ITickable
     {
         private SpawnerData _spawnerData;
         private Collider _collider;
@@ -15,6 +15,11 @@ namespace GlassyCode.Simulation.Agents.Logic
         {
             _spawnerData = spawnerData;
             _collider = collider;
+        }
+        
+        public void Initialize()
+        {
+            EnableSpawning();
         }
         
         public void Tick()

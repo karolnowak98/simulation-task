@@ -1,12 +1,13 @@
+using GlassyCode.Simulation.Agents.Data;
 using GlassyCode.Simulation.Core.Data;
 using GlassyCode.Simulation.Core.Static;
 using UnityEngine;
 
-namespace GlassyCode.Simulation.Agents.Data
+namespace GlassyCode.Simulation.Map.Data
 {
     [CreateAssetMenu(menuName = MenuNames.Configs + nameof(AgentsConfig), fileName = nameof(AgentsConfig))]
-    public sealed class AgentsConfig : Config, IAgentsConfig
+    public sealed class MapConfig : Config, IMapConfig
     {
-        [field: SerializeField] public SpawnerData Spawner { get; private set; }
+        [field: SerializeField] public Vector2 Size { get; private set; }
     }
 }

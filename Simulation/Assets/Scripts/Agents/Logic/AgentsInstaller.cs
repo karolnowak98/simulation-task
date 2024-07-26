@@ -11,7 +11,7 @@ namespace GlassyCode.Simulation.Agents.Logic
         
         public override void InstallBindings()
         {
-            Container.Bind(typeof(AgentsManager), typeof(IAgentsManager))
+            Container.Bind(typeof(AgentsManager), typeof(IAgentsManager), typeof(IInitializable))
                 .To<AgentsManager>()
                 .FromSubContainerResolve()
                 .ByMethod(InstallAgents)
