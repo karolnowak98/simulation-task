@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1610926894975647740, guid: 8c51a1a5b2bf99d449c339627824359a, type: 3}
       propertyPath: <Data>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: f49d2f0d3ad359847815829ac7b3be0e, type: 2}
+      objectReference: {fileID: 11400000, guid: 64ec18419d3f2af429f19ea9266dea30, type: 2}
     - target: {fileID: 1858897652058987457, guid: 8c51a1a5b2bf99d449c339627824359a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -55,10 +55,10 @@ PrefabInstance:
     - target: {fileID: 2749653987340466732, guid: 8c51a1a5b2bf99d449c339627824359a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55f797a7fe1fd3045b2e6573ad8fcf23, type: 2}
+      objectReference: {fileID: 2100000, guid: f1eded48b5efd78408a1934a80cff328, type: 2}
     - target: {fileID: 4318633879668091655, guid: 8c51a1a5b2bf99d449c339627824359a, type: 3}
       propertyPath: m_Name
-      value: Rysiu
+      value: Kamil
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
