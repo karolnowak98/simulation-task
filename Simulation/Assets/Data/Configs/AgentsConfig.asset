@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1aeb71eef4292a0403fa24f95dedc, type: 3}
+  m_Name: AgentsConfig
+  m_EditorClassIdentifier: 
+  <Spawner>k__BackingField:
+    <IntervalRange>k__BackingField: {x: 0.01, y: 0.1}
+    <InitialAgentsNumber>k__BackingField: 4
+    <MaxAgentsNumber>k__BackingField: 100
+    <Agents>k__BackingField:
+    - {fileID: 7666157953866900418, guid: 39de352122d6ed94fa224538a099377f, type: 3}
+    - {fileID: 7666157953866900418, guid: e4c57f3443f201c438f4be221b4019af, type: 3}
+    - {fileID: 7666157953866900418, guid: 9dc013cb717e19040b9f0065895f0153, type: 3}
+    - {fileID: 7666157953866900418, guid: a7bc8b12c3edf96429a01599a491d7a1, type: 3}
+    <InitialPoolSize>k__BackingField: 5
+    <MaxPoolSize>k__BackingField: 1000
