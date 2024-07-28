@@ -20,19 +20,19 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
 
         protected override Agent CreateElement()
         {
-            var agent = _factory.Create(_agent);
-            
-            agent.SetPosition(_spawningArea.GetRandomPointInCollider());
-            agent.SetParent(Parent);
-            agent.Pool = this;
-            
-            return agent;
+            return _factory.Create(_agent, GetRandomPos(), Parent, this);
         }
         
         protected override void OnGetElementFromPool(Agent agent)
         {
-            agent.SetPosition(_spawningArea.GetRandomPointInCollider());
+            agent.SetPosition(GetRandomPos());
             base.OnGetElementFromPool(agent);
+        }
+
+        private Vector3 GetRandomPos()
+        {
+            var randomPos = _spawningArea.GetRandomPointInCollider();
+            return new Vector3(randomPos.x, _agent.Position.y, randomPos.z);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using GlassyCode.Simulation.Core.Pools.Object;
 using GlassyCode.Simulation.Core.Utility.Interfaces;
 using GlassyCode.Simulation.Game.Agents.Data;
 using GlassyCode.Simulation.Game.Agents.Logic.Collection;
@@ -67,7 +68,8 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
                 .AsSingle()
                 .WithArguments(Config.Spawner, SpawnerArea);
 
-            Container.BindFactory<Object, Agent, Agent.Factory>().FromFactory<PrefabFactory<Agent>>();
+            Container.BindFactory<Object, Vector3, Transform, IGlassyObjectPool<Agent>, Agent, Agent.Factory>()
+                .FromFactory<PrefabFactory<Vector3, Transform, IGlassyObjectPool<Agent>, Agent>>();
         }
 
         private void DeclareSignals()

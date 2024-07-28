@@ -43,9 +43,9 @@ namespace GlassyCode.Simulation.Core.Pools.Object
             return element;
         }
 
-        protected virtual void OnGetElementFromPool(T enemy)
+        protected virtual void OnGetElementFromPool(T agent)
         {
-            enemy.Reset();
+            agent.Reset();
         }
 
         protected virtual void OnReleaseElementToPool(T element)

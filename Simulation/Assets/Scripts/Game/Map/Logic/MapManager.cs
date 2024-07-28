@@ -4,14 +4,14 @@ using Zenject;
 
 namespace GlassyCode.Simulation.Game.Map.Logic
 {
-    public sealed class MapManager : IInitializable
+    public sealed class MapManager : IMapManager, IInitializable
     {
-        private readonly IMapConfig _config;
+        public IMapConfig Config { get; }
         private readonly Transform _map;
         
         public MapManager(IMapConfig config, Transform map)
         {
-            _config = config;
+            Config = config;
             _map = map;
         }
         
@@ -22,7 +22,7 @@ namespace GlassyCode.Simulation.Game.Map.Logic
 
         private void SetMapSize(Transform map)
         {
-            map.localScale = _config.Size;
+            map.localScale = Config.Size;
         }
     }
 }

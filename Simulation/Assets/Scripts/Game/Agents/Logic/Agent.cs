@@ -39,7 +39,15 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
 
         public event Action<int> OnHealthChanged;
         public event Action OnDied;
-
+        
+        [Inject]
+        private void Construct(Vector3 position, Transform parent, IGlassyObjectPool<Agent> pool)
+        {
+            SetPosition(position);
+            SetParent(parent);
+            Pool = pool;
+        }
+        
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -89,6 +97,6 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
             Selection.SetActive(false);
         }
 
-        public sealed class Factory : PlaceholderFactory<Object, Agent> {}
+        public sealed class Factory : PlaceholderFactory<Object, Vector3, Transform, IGlassyObjectPool<Agent>, Agent> {}
     }
 }

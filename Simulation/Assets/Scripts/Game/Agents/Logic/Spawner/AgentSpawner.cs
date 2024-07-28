@@ -6,6 +6,8 @@ using GlassyCode.Simulation.Core.Utility.Extensions;
 using GlassyCode.Simulation.Game.Agents.Data;
 using GlassyCode.Simulation.Game.Agents.Logic.Collection;
 using GlassyCode.Simulation.Game.Agents.Logic.Signals;
+using GlassyCode.Simulation.Game.Map.Logic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -21,7 +23,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
         private readonly int _initialAgentsNumber;
 
         public AgentSpawner(SpawnerData data, Collider area, ITimeController timeController, 
-            Agent.Factory factory, SignalBus signalBus, IAgentCollection agents)
+            Agent.Factory factory, SignalBus signalBus, IAgentCollection agents, IMapManager mapManager)
         {
             _signalBus = signalBus;
             _agents = agents;
@@ -38,8 +40,8 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
                 {
                     continue;
                 }
-                
-                _agentsPools[type] = new AgentPool(factory, area, agent, new GameObject(nameof(AgentSpawner)).transform, 
+
+                _agentsPools[type] = new AgentPool(factory, area, agent, new GameObject(type + nameof(AgentPool)).transform, 
                     data.InitialPoolSize, data.MaxPoolSize);
             }
         }

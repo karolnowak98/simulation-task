@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858897652058987457, guid: 8c51a1a5b2bf99d449c339627824359a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1858897652058987457, guid: 8c51a1a5b2bf99d449c339627824359a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 55f797a7fe1fd3045b2e6573ad8fcf23, type: 2}
     - target: {fileID: 4318633879668091655, guid: 8c51a1a5b2bf99d449c339627824359a, type: 3}
       propertyPath: m_Name
-      value: Rysiu
+      value: Ryszard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
