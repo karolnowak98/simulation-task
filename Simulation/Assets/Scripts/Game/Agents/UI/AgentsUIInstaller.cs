@@ -11,6 +11,11 @@ namespace GlassyCode.Simulation.Game.Agents.UI
                 .To<MainPanel>()
                 .FromComponentsInHierarchy()
                 .AsSingle();
+            
+            Container.Bind(typeof(IInitializable), typeof(IDisposable))
+                .To<AgentInfoPanel>()
+                .FromComponentsInHierarchy()
+                .AsSingle();
         }
     }
 }

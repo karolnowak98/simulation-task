@@ -18,12 +18,14 @@ namespace GlassyCode.Simulation.Game.Agents.UI
         {
             _signalBus.Subscribe<AgentSelectedSignal>(SetAndShow);
             _signalBus.Subscribe<AgentDeselectedSignal>(Hide);
+            _signalBus.Subscribe<SelectedAgentHealthChangedSignal>(SetHealth);
         }
 
         public void Dispose()
         {
             _signalBus.TryUnsubscribe<AgentSelectedSignal>(SetAndShow);
             _signalBus.TryUnsubscribe<AgentDeselectedSignal>(Hide);
+            _signalBus.TryUnsubscribe<SelectedAgentHealthChangedSignal>(SetHealth);
         }
 
         private void SetAndShow(AgentSelectedSignal signal)
@@ -33,6 +35,12 @@ namespace GlassyCode.Simulation.Game.Agents.UI
 
             NameTmp.text = data.Name;
             HealthTmp.text = $"{agent.Health}";
+            Show();
+        }
+        
+        private void SetHealth(SelectedAgentHealthChangedSignal signal)
+        {
+            HealthTmp.text = $"{signal.Health}";
         }
     }
 }

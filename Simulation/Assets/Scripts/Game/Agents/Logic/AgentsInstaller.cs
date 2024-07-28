@@ -42,7 +42,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
                 .To<AgentCollection>()
                 .AsSingle();
             
-            subContainer.Bind(typeof(AgentSelector), typeof(IAgentSelector), typeof(ISelectable))
+            subContainer.Bind(typeof(AgentSelector), typeof(IAgentSelector))
                 .To<AgentSelector>()
                 .AsSingle();
             
@@ -58,6 +58,9 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
         {
             Container.DeclareSignal<AgentSpawnedSignal>();
             Container.DeclareSignal<AgentDiedSignal>();
+            Container.DeclareSignal<AgentSelectedSignal>();
+            Container.DeclareSignal<AgentDeselectedSignal>();
+            Container.DeclareSignal<SelectedAgentHealthChangedSignal>();
         }
     }
 }

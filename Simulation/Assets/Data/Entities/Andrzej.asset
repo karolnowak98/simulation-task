@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24d98b37df34e0dae38418a6007a0a4, type: 3}
   m_Name: Andrzej
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 0
+  <Name>k__BackingField: Andrzej
   <InitialHealth>k__BackingField: 3
   <MoveSpeed>k__BackingField: 10
   <Damage>k__BackingField: 1

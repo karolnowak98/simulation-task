@@ -1,3 +1,4 @@
+using System;
 using GlassyCode.Simulation.Core.Utility.Extensions;
 using GlassyCode.Simulation.Core.Utility.Interfaces;
 using GlassyCode.Simulation.Game.Agents.Logic.Signals;
@@ -7,13 +8,13 @@ using Zenject;
 
 namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
 {
-    public sealed class AgentSelector : IAgentSelector, IEnableable
+    public sealed class AgentSelector : IAgentSelector, IEnableable, IInitializable, IDisposable
     {
         private readonly SignalBus _signalBus;
         private readonly IInputManager _inputManager;
         private readonly Camera _camera;
         
-        private ISelectable _selected;
+        private IAgent _selectedAgent;
         private bool _isEnabled;
 
         public AgentSelector(SignalBus signalBus, IInputManager inputManager)
@@ -21,6 +22,16 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
             _signalBus = signalBus;
             _inputManager = inputManager;
             _camera = CameraExtensions.GetMainCamera();
+        }
+        
+        public void Initialize()
+        {
+            _signalBus.Subscribe<AgentDiedSignal>(OnAgentDied);
+        }
+
+        public void Dispose()
+        {
+            _signalBus.Subscribe<AgentDiedSignal>(OnAgentDied);
         }
 
         public void Enable()
@@ -51,36 +62,50 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
         {
             var mouseScreenPosition = _inputManager.MousePosition;
             var ray = _camera.ScreenPointToRay(mouseScreenPosition);
-            
 
             if (Physics.Raycast(ray, out var hit))
             {
                 var collider = hit.collider;
                 
-                if (collider.CompareTag("Agent") && collider.TryGetComponent<ISelectable>(out var selectable))
+                if (collider.CompareTag("Agent") && collider.TryGetComponent<IAgent>(out var agent))
                 {
                     DeselectAgent();  
-                    selectable.Select();
-                    _selected = selectable;
-
-                    if (_selected is IAgent agent)
-                    {
-                        _signalBus.TryFire(new AgentSelectedSignal{ Agent = agent });
-                    }
+                    _selectedAgent = agent;
+                    _selectedAgent.Select();
+                    _selectedAgent.OnHealthChanged += FireHealthChangedSignal;
+                    _selectedAgent.OnDied += DeselectAgent;
+                    _signalBus.TryFire(new AgentSelectedSignal{ Agent = agent });
                 }
             }
         }
 
         private void DeselectAgent()
         {
-            if (_selected == null)
+            if (_selectedAgent == null)
             {
                 return;
             }
             
-            _selected.Deselect();
-            _selected = null;
+            _selectedAgent.Deselect();
+            _selectedAgent.OnHealthChanged -= FireHealthChangedSignal;
+            _selectedAgent.OnDied -= DeselectAgent;
+            _selectedAgent = null;
             _signalBus.TryFire(new AgentDeselectedSignal());
+        }
+        
+        private void OnAgentDied(AgentDiedSignal signal)
+        {
+            if (_selectedAgent != signal.Agent)
+            {
+                return;
+            }
+            
+            DeselectAgent();
+        }
+
+        private void FireHealthChangedSignal(int health)
+        {
+            _signalBus.TryFire(new SelectedAgentHealthChangedSignal{ Health = health });
         }
     }
 }

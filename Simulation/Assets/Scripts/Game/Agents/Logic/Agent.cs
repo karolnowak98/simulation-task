@@ -1,3 +1,4 @@
+using System;
 using GlassyCode.Simulation.Core.Pools.Object;
 using GlassyCode.Simulation.Core.Utility.Extensions;
 using GlassyCode.Simulation.Core.Utility.Interfaces;
@@ -5,6 +6,7 @@ using GlassyCode.Simulation.Game.Agents.Data;
 using GlassyCode.Simulation.Game.Agents.Logic.Signals;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace GlassyCode.Simulation.Game.Agents.Logic
 {
@@ -18,15 +20,31 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
         
         private Rigidbody _rb;
         
-        public int Health { get; private set; }
+        private int _health;
+
+        public int Health
+        {
+            get => _health;
+            private set
+            {
+                if (_health == value)
+                {
+                    return;
+                }
+                
+                _health = value;
+                OnHealthChanged?.Invoke(_health);
+            }
+        }
         public int MoveSpeed { get; private set; }
         public int Damage { get; private set; }
 
+        public event Action<int> OnHealthChanged;
+        public event Action OnDied;
+        
         private void Awake()
         {
             TryGetComponent(out _rb);
-
-            Health = Data.InitialHealth;
             MoveSpeed = Data.MoveSpeed;
             Damage = Data.Damage;
         }
@@ -46,6 +64,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
         public override void Reset()
         {
             _rb.SetRandomDirectionVelocityXZ(MoveSpeed);
+            Health = Data.InitialHealth;
             
             Enable();
         }
@@ -64,6 +83,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
         {
             Deselect();
             Pool.TryRelease(this);
+            OnDied?.Invoke();
             _signalBus.TryFire(new AgentDiedSignal{ Agent = this });
         }
 
