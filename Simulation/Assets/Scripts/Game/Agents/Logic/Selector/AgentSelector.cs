@@ -62,7 +62,11 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
                     DeselectAgent();  
                     selectable.Select();
                     _selected = selectable;
-                    _signalBus.TryFire(new AgentSelectedSignal{ Agent = _selected });
+
+                    if (_selected is IAgent agent)
+                    {
+                        _signalBus.TryFire(new AgentSelectedSignal{ Agent = agent });
+                    }
                 }
             }
         }

@@ -17,17 +17,18 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
         [Inject] private SignalBus _signalBus;
         
         private Rigidbody _rb;
-        private int _health;
-        private int _moveSpeed;
-        private int _damage;
+        
+        public int Health { get; private set; }
+        public int MoveSpeed { get; private set; }
+        public int Damage { get; private set; }
 
         private void Awake()
         {
             TryGetComponent(out _rb);
 
-            _health = Data.InitialHealth;
-            _moveSpeed = Data.MoveSpeed;
-            _damage = Data.Damage;
+            Health = Data.InitialHealth;
+            MoveSpeed = Data.MoveSpeed;
+            Damage = Data.Damage;
         }
         
         private void OnCollisionEnter(Collision col)
@@ -39,21 +40,21 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
                 return;
             }
             
-            damageable.TakeDamage(_damage);
+            damageable.TakeDamage(Damage);
         }
         
         public override void Reset()
         {
-            _rb.SetRandomDirectionVelocityXZ(_moveSpeed);
+            _rb.SetRandomDirectionVelocityXZ(MoveSpeed);
             
             Enable();
         }
 
         public void TakeDamage(int damage)
         {
-            _health -= damage;
+            Health -= damage;
 
-            if (_health <= 0)
+            if (Health <= 0)
             {
                 Die();
             }
