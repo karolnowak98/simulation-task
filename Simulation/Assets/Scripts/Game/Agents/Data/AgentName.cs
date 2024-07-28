@@ -1,9 +1,9 @@
 namespace GlassyCode.Simulation.Game.Agents.Data
 {
-    public enum AgentType
+    public enum AgentName
     {
         Andrzej,
-        Rysiu,
+        Ryszard,
         Adam,
         Kamil
     }

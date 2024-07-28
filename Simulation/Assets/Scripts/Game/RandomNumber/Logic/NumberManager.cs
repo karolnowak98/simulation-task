@@ -4,7 +4,7 @@ using GlassyCode.Simulation.Game.RandomNumber.Data;
 
 namespace GlassyCode.Simulation.Game.RandomNumber.Logic
 {
-    public sealed class RandomNumberManager : IRandomNumberManager
+    public sealed class NumberManager : INumberManager
     {
         private int _number;
         public int Number
@@ -22,19 +22,19 @@ namespace GlassyCode.Simulation.Game.RandomNumber.Logic
             }
         }
         
-        public IRandomNumberConfig Config { get; private set; }
+        public INumberConfig Config { get; }
         public bool IsDivisibleByThree => Number % 3 == 0;
         public bool IsDivisibleByFive => Number % 5 == 0;
         public bool IsDivisibleByFifteen => Number % 15 == 0;
 
         public event Action<int> OnRandomNumberChanged;
 
-        public RandomNumberManager(IRandomNumberConfig config)
+        public NumberManager(INumberConfig config)
         {
             Config = config;
         }
 
-        public void RandomNumber()
+        public void GenerateRandomNumber()
         {
             Number = Config.RandomNumberRange.GetRandomNumber();
             OnRandomNumberChanged?.Invoke(Number);

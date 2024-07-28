@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GlassyCode.Simulation.Game.RandomNumber.Data
 {
-    public interface IRandomNumberConfig
+    public interface INumberConfig
     {
         Vector2Int RandomNumberRange { get; }
         string DivisibleByThreeText { get; }

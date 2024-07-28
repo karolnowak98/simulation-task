@@ -9,9 +9,9 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
 {
     public sealed class AgentsManager : IAgentsManager, ITickable, IDisposable, IEnableable
     {
-        public IAgentSpawner Spawner { get; private set; }
-        public IAgentSelector Selector { get; private set; }
-        public IAgentCollection Collection { get; private set; }
+        public IAgentSpawner Spawner { get; }
+        public IAgentSelector Selector { get; }
+        public IAgentCollection Collection { get; }
 
         public AgentsManager(IAgentSpawner spawner, IAgentSelector selector, IAgentCollection collection)
         {

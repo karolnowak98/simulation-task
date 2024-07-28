@@ -11,7 +11,7 @@ namespace GlassyCode.Simulation.Game.Map.Logic
         
         public override void InstallBindings()
         {
-            Container.Bind(typeof(MapManager), typeof(IMapManager), typeof(IInitializable))
+            Container.Bind(typeof(MapManager), typeof(IInitializable))
                 .To<MapManager>()
                 .AsSingle()
                 .WithArguments(Config, Map);

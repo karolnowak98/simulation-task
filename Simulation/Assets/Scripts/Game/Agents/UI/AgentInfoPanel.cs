@@ -1,7 +1,6 @@
 using System;
 using GlassyCode.Simulation.Core.UI;
 using GlassyCode.Simulation.Game.Agents.Logic;
-using GlassyCode.Simulation.Game.Agents.Logic.Signals;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -33,8 +32,8 @@ namespace GlassyCode.Simulation.Game.Agents.UI
         {
             var data = agent.Data;
 
-            NameTmp.text = data.Name;
-            HealthTmp.text = $"{agent.Health}";
+            NameTmp.text = $"{data.Name}";
+            SetHealth(agent.Health);
             Show();
         }
         

@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace GlassyCode.Simulation.Game.RandomNumber.Data
 {
-    [CreateAssetMenu(menuName = MenuNames.Configs + nameof(RandomNumberConfig), fileName = nameof(RandomNumberConfig))]
-    public sealed class RandomNumberConfig : Config, IRandomNumberConfig
+    [CreateAssetMenu(menuName = MenuNames.Configs + nameof(NumberConfig), fileName = nameof(NumberConfig))]
+    public sealed class NumberConfig : Config, INumberConfig
     {
         [field: SerializeField] public Vector2Int RandomNumberRange { get; private set; }
         

@@ -13,9 +13,8 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
         private readonly SignalBus _signalBus;
         private readonly IInputManager _inputManager;
         private readonly Camera _camera;
-        
         private IAgent _selectedAgent;
-        private bool _isEnabled;
+        private bool _canSelect;
 
         public event Action<IAgent> OnAgentSelected;
         public event Action OnAgentDeselected;
@@ -23,6 +22,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
 
         public AgentSelector(SignalBus signalBus, IInputManager inputManager)
         {
+            _signalBus = signalBus;
             _inputManager = inputManager;
             _camera = CameraExtensions.GetMainCamera();
         }
@@ -39,40 +39,37 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
 
         public void Enable()
         {
-            if (_isEnabled)
+            if (_canSelect)
             {
                 return;
             }
 
             _inputManager.OnSelect += SelectAgent;
             _inputManager.OnCancel += DeselectAgent;
-            _isEnabled = true;
+            _canSelect = true;
         }
 
         public void Disable()
         {
-            if (!_isEnabled)
+            if (!_canSelect)
             {
                 return;
             } 
 
             _inputManager.OnSelect -= SelectAgent;
             _inputManager.OnCancel -= DeselectAgent;
-            _isEnabled = false;
+            _canSelect = false;
         }
 
         private void SelectAgent()
         {
-            var mouseScreenPosition = _inputManager.MousePosition;
-            var ray = _camera.ScreenPointToRay(mouseScreenPosition);
+            var ray = _camera.ScreenPointToRay(_inputManager.MousePosition);
 
             if (Physics.Raycast(ray, out var hit))
             {
-                var collider = hit.collider;
-                
-                if (collider.CompareTag("Agent") && collider.TryGetComponent<IAgent>(out var agent))
+                if (hit.collider.CompareTag("Agent") && hit.collider.TryGetComponent(out IAgent agent))
                 {
-                    DeselectAgent();  
+                    DeselectAgent();
                     _selectedAgent = agent;
                     _selectedAgent.Select();
                     _selectedAgent.OnHealthChanged += OnHealthChanged;
@@ -98,12 +95,10 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
         
         private void OnAgentDied(AgentDiedSignal signal)
         {
-            if (_selectedAgent != signal.Agent)
+            if (_selectedAgent == signal.Agent)
             {
-                return;
+                DeselectAgent();
             }
-            
-            DeselectAgent();
         }
 
         private void OnHealthChanged(int health)

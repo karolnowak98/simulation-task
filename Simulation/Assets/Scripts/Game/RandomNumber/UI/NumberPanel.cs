@@ -8,24 +8,24 @@ using Zenject;
 
 namespace GlassyCode.Simulation.Game.RandomNumber.UI
 {
-    public sealed class RandomNumberPanel : UIElement, IInitializable, IDisposable
+    public sealed class NumberPanel : UIElement, IInitializable, IDisposable
     {
         [field: SerializeField] public Button ClickBtn { get; private set; }
         [field: SerializeField] public TextMeshProUGUI NumberTmp { get; private set; }
         [field: SerializeField] public TextMeshProUGUI MarkoPoloTmp { get; private set; }
 
-        [Inject] private IRandomNumberManager _randomNumberManager;
+        [Inject] private INumberManager _numberManager;
         
         public void Initialize()
         {
-            ClickBtn.onClick.AddListener(() => _randomNumberManager.RandomNumber());
-            _randomNumberManager.OnRandomNumberChanged += UpdatePanel;
+            ClickBtn.onClick.AddListener(() => _numberManager.GenerateRandomNumber());
+            _numberManager.OnRandomNumberChanged += UpdatePanel;
         }
 
         public void Dispose()
         {
             ClickBtn.onClick.RemoveAllListeners();
-            _randomNumberManager.OnRandomNumberChanged -= UpdatePanel;
+            _numberManager.OnRandomNumberChanged -= UpdatePanel;
         }
 
         private void UpdatePanel(int number)
@@ -33,18 +33,19 @@ namespace GlassyCode.Simulation.Game.RandomNumber.UI
             NumberTmp.text = $"{number}";
 
             var text = "";
-            
-            if (_randomNumberManager.IsDivisibleByFifteen)
+
+            //More optimal would be checking if the number is divisible by 3 and 5 instead of 15, prioritize clarity
+            if (_numberManager.IsDivisibleByFifteen)
             {
-                text = _randomNumberManager.Config.DivisibleByFifteenText;
+                text = _numberManager.Config.DivisibleByFifteenText;
             }
-            else if (_randomNumberManager.IsDivisibleByThree)
+            else if (_numberManager.IsDivisibleByThree)
             {
-                text = _randomNumberManager.Config.DivisibleByThreeText;
+                text = _numberManager.Config.DivisibleByThreeText;
             }
-            else if (_randomNumberManager.IsDivisibleByFive)
+            else if (_numberManager.IsDivisibleByFive)
             {
-                text = _randomNumberManager.Config.DivisibleByFiveText;
+                text = _numberManager.Config.DivisibleByFiveText;
             }
 
             MarkoPoloTmp.text = text;

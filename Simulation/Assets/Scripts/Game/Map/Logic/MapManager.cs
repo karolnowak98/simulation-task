@@ -4,7 +4,7 @@ using Zenject;
 
 namespace GlassyCode.Simulation.Game.Map.Logic
 {
-    public sealed class MapManager : IMapManager, IInitializable
+    public sealed class MapManager : IInitializable
     {
         private readonly IMapConfig _config;
         private readonly Transform _map;

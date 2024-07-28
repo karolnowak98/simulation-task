@@ -13,7 +13,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
 {
     public sealed class AgentSpawner : IAgentSpawner
     {
-        private readonly Dictionary<AgentType, IGlassyObjectPool<Agent>> _agentsPools = new();
+        private readonly Dictionary<AgentName, IGlassyObjectPool<Agent>> _agentsPools = new();
         private readonly IAgentCollection _agents;
         private readonly ITimer _timer;
         private readonly SignalBus _signalBus;
@@ -30,7 +30,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
             
             _timer = new RandomAutomaticTimer(timeController, data.IntervalRange);
 
-            foreach (AgentType type in Enum.GetValues(typeof(AgentType)))
+            foreach (AgentName type in Enum.GetValues(typeof(AgentName)))
             {
                 var agent = data.GetAgentByType(type);
 
@@ -39,7 +39,8 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
                     continue;
                 }
                 
-                _agentsPools[type] = new AgentPool(factory, area, agent, new GameObject(nameof(AgentSpawner)).transform);
+                _agentsPools[type] = new AgentPool(factory, area, agent, new GameObject(nameof(AgentSpawner)).transform, 
+                    data.InitialPoolSize, data.MaxPoolSize);
             }
         }
         
@@ -62,7 +63,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
 
         public void SpawnInitialEnemies()
         {
-            for (var i = 0; i < _initialAgentsNumber; i++)
+            for (var i = 0; i < _initialAgentsNumber - 1; i++)
             {
                 SpawnAgent();
             }
@@ -70,13 +71,16 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Spawner
         
         private void SpawnAgent()
         {
-            if (_maxAgentsNumber <= _agents.Count)
+            if (_agents.Count >= _maxAgentsNumber)
             {
                 return;
             }
             
-            var agent = _agentsPools[AgentType.Adam.GetRandomValue()].Pool.Get();
-            _signalBus.TryFire(new AgentSpawnedSignal{ Agent = agent });
+            if (_agentsPools.TryGetValue(AgentName.Adam.GetRandomValue(), out var pool))
+            {
+                var agent = pool.Pool.Get();
+                _signalBus.TryFire(new AgentSpawnedSignal { Agent = agent });
+            }
         }
     }
 }

@@ -4,14 +4,14 @@ using Zenject;
 
 namespace GlassyCode.Simulation.Game.RandomNumber.Logic
 {
-    public sealed class RandomNumberInstaller : MonoInstaller
+    public sealed class NumberInstaller : MonoInstaller
     {
-        [field: SerializeField] public RandomNumberConfig Config { get; private set; }
+        [field: SerializeField] public NumberConfig Config { get; private set; }
         
         public override void InstallBindings()
         {
-            Container.Bind(typeof(RandomNumberManager), typeof(IRandomNumberManager))
-                .To<RandomNumberManager>()
+            Container.Bind(typeof(NumberManager), typeof(INumberManager))
+                .To<NumberManager>()
                 .AsSingle()
                 .WithArguments(Config);
         }
