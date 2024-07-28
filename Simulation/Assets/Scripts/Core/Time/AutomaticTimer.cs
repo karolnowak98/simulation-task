@@ -12,7 +12,7 @@ namespace GlassyCode.Simulation.Core.Time
         
         public event Action<float> OnTimerStarted;
         public event Action OnTimerStopped;
-        public event Action OnTimerExpired;
+        public event Action OnExpired;
 
         public AutomaticTimer(ITimeController timeController, float countdownTime)
         {
@@ -30,7 +30,7 @@ namespace GlassyCode.Simulation.Core.Time
 
             if (_remainingTime <= 0f)
             {
-                OnTimerExpired?.Invoke();
+                OnExpired?.Invoke();
                 Reset();
             }
         }

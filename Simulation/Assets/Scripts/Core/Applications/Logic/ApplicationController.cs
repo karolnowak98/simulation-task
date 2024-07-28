@@ -6,10 +6,9 @@ namespace GlassyCode.Simulation.Core.Applications.Logic
 {
     public sealed class ApplicationController : IApplicationController, IInitializable
     {
-        private IApplicationConfig _applicationConfig;
+        private readonly IApplicationConfig _applicationConfig;
 
-        [Inject]
-        private void Construct(IApplicationConfig applicationConfig)
+        public ApplicationController(IApplicationConfig applicationConfig)
         {
             _applicationConfig = applicationConfig;
         }

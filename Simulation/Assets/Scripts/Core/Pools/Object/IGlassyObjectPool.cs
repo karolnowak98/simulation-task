@@ -8,5 +8,6 @@ namespace GlassyCode.Simulation.Core.Pools.Object
         IObjectPool<T> Pool { get; }
         void Clear();
         void SetPoolParent(Transform parent);
+        void TryRelease(T element);
     }
 }

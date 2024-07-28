@@ -23,6 +23,14 @@ namespace GlassyCode.Simulation.Core.Pools.Object
             Pool.Clear();
         }
         
+        public void TryRelease(T element)
+        {
+            if (element.IsActive)
+            {
+                Pool.Release(element);
+            }
+        }
+        
         public void SetPoolParent(Transform parent)
         {
             Parent = parent;
@@ -31,7 +39,7 @@ namespace GlassyCode.Simulation.Core.Pools.Object
         protected virtual T CreateElement()
         {
             var element = UnityEngine.Object.Instantiate(Prefab);
-            element.Pool = Pool;
+            element.Pool = this;
             return element;
         }
 

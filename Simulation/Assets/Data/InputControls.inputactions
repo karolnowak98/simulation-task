@@ -1,0 +1,65 @@
+{
+    "name": "InputControls",
+    "maps": [
+        {
+            "name": "Simulation",
+            "id": "5085c3be-0abf-4b7a-8025-567c42edfaef",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "685faee1-04a5-4a6d-9d80-49febaef390e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "7699bf27-5983-48db-ba1b-6de3df070573",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ea7efca0-e133-4753-b802-749c1dc00f84",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3078bf1b-d994-4fdf-9656-0a101656e1f4",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1f5faae-2b3a-4617-ac4e-d5ae7f667d86",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

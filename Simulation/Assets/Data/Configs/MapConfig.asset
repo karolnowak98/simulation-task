@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ff7b474c69493b80a8f7f152047097, type: 3}
   m_Name: MapConfig
   m_EditorClassIdentifier: 
-  <Size>k__BackingField: {x: 10, y: 10}
+  <Size>k__BackingField: {x: 5, y: 5, z: 5}

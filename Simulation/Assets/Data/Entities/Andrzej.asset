@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Andrzej
   m_EditorClassIdentifier: 
   <Id>k__BackingField: 0
-  <MoveSpeed>k__BackingField: 10
   <InitialHealth>k__BackingField: 3
+  <MoveSpeed>k__BackingField: 10
+  <Damage>k__BackingField: 1

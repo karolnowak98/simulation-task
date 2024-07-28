@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AgentsConfig
   m_EditorClassIdentifier: 
   <Spawner>k__BackingField:
-    <IntervalRange>k__BackingField: {x: 2, y: 6}
-    <InitialAgentsNumber>k__BackingField: 4
-    <MaxAgentsNumber>k__BackingField: 5
-    <SpawnerSize>k__BackingField: {x: 10, y: 10}
+    <IntervalRange>k__BackingField: {x: 0.01, y: 0.07}
+    <InitialAgentsNumber>k__BackingField: 5
+    <MaxAgentsNumber>k__BackingField: 1000
+    <Agent>k__BackingField: {fileID: 7666157953866900418, guid: e4c57f3443f201c438f4be221b4019af, type: 3}

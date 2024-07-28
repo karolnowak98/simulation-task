@@ -5,7 +5,8 @@ namespace GlassyCode.Simulation.Core.Utility
     public abstract class GlassyMonoBehaviour : MonoBehaviour
     {
         public bool IsActive => gameObject.activeSelf;
-        public Transform Transform => transform; 
+        public Transform Transform => transform;
+        public Vector3 Position => transform.position;
         
         public void Enable()
         {
