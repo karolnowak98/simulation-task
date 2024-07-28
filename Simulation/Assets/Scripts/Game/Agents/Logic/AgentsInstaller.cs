@@ -28,6 +28,8 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
 
         private void BindAgentsManager()
         {
+            Container.Bind<IAgentsConfig>().To<AgentsConfig>().FromInstance(Config).AsSingle();
+            
             Container.Bind(typeof(AgentsManager), typeof(IAgentsManager), 
                     typeof(ITickable), typeof(IDisposable), typeof(IEnableable))
                 .To<AgentsManager>()

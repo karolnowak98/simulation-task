@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a1aeb71eef4292a0403fa24f95dedc, type: 3}
   m_Name: AgentsConfig
   m_EditorClassIdentifier: 
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
   <Spawner>k__BackingField:
-    <IntervalRange>k__BackingField: {x: 0.01, y: 0.1}
+    <IntervalRange>k__BackingField: {x: 2, y: 6}
     <InitialAgentsNumber>k__BackingField: 4
-    <MaxAgentsNumber>k__BackingField: 100
+    <MaxAgentsNumber>k__BackingField: 30
     <Agents>k__BackingField:
     - {fileID: 7666157953866900418, guid: 39de352122d6ed94fa224538a099377f, type: 3}
     - {fileID: 7666157953866900418, guid: e4c57f3443f201c438f4be221b4019af, type: 3}

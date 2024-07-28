@@ -22,5 +22,10 @@ namespace GlassyCode.Simulation.Core.Utility.Extensions
         {
             return Physics.Raycast(ray, out var hit, Mathf.Infinity, layerMask) ? hit.point : null;
         }
+        
+        public static Collider GetRayastHitCollider(Ray ray, LayerMask layerMask)
+        {
+            return Physics.Raycast(ray, out var hit, Mathf.Infinity, layerMask) ? hit.collider : null;
+        }
     }
 }

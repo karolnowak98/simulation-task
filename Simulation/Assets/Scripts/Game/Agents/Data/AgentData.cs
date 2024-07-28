@@ -8,7 +8,7 @@ namespace GlassyCode.Simulation.Game.Agents.Data
     public sealed class AgentData : EntityData
     {
         [field: SerializeField] public AgentName Name { get; private set; } 
-        [field: SerializeField] public int InitialHealth { get; private set; } 
+        [field: SerializeField] public int InitialHealth { get; private set; }
         [field: SerializeField] public int MoveSpeed { get; private set; } 
         [field: SerializeField] public int Damage { get; private set; }
     }

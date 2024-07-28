@@ -1,6 +1,7 @@
 using System;
 using GlassyCode.Simulation.Core.Utility.Extensions;
 using GlassyCode.Simulation.Core.Utility.Interfaces;
+using GlassyCode.Simulation.Game.Agents.Data;
 using GlassyCode.Simulation.Game.Agents.Logic.Signals;
 using GlassyCode.Simulation.Game.Global.Input;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
         private readonly SignalBus _signalBus;
         private readonly IInputManager _inputManager;
         private readonly Camera _camera;
+        private readonly LayerMask _layerMask;
         private IAgent _selectedAgent;
         private bool _canSelect;
 
@@ -20,8 +22,9 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
         public event Action OnAgentDeselected;
         public event Action<int> OnSelectedAgentHealthChanged;
 
-        public AgentSelector(SignalBus signalBus, IInputManager inputManager)
+        public AgentSelector(SignalBus signalBus, IInputManager inputManager, IAgentsConfig config)
         {
+            _layerMask = config.LayerMask;
             _signalBus = signalBus;
             _inputManager = inputManager;
             _camera = CameraExtensions.GetMainCamera();
@@ -65,17 +68,21 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
         {
             var ray = _camera.ScreenPointToRay(_inputManager.MousePosition);
 
-            if (Physics.Raycast(ray, out var hit))
+            var hitCollider = PhysicsExtensions.GetRayastHitCollider(ray, _layerMask);
+            if (hitCollider == null)
             {
-                if (hit.collider.CompareTag("Agent") && hit.collider.TryGetComponent(out IAgent agent))
-                {
-                    DeselectAgent();
-                    _selectedAgent = agent;
-                    _selectedAgent.Select();
-                    _selectedAgent.OnHealthChanged += OnHealthChanged;
-                    _selectedAgent.OnDied += DeselectAgent;
-                    OnAgentSelected?.Invoke(agent);
-                }
+                DeselectAgent();
+                return;
+            }
+            
+            if (hitCollider.TryGetComponent(out IAgent agent))
+            {
+                DeselectAgent();  
+                _selectedAgent = agent;
+                _selectedAgent.Select();
+                _selectedAgent.OnHealthChanged += OnHealthChanged;
+                _selectedAgent.OnDied += DeselectAgent;
+                OnAgentSelected?.Invoke(agent);
             }
         }
 
