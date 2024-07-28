@@ -1,5 +1,5 @@
 using GlassyCode.Simulation.Core.Data;
-using GlassyCode.Simulation.Game.Static;
+using GlassyCode.Simulation.Game.Global.Static;
 using UnityEngine;
 
 namespace GlassyCode.Simulation.Game.Agents.Data

@@ -9,20 +9,20 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
 {
     public sealed class AgentsManager : IAgentsManager, ITickable, IDisposable, IEnableable
     {
-        private readonly IAgentSpawner _spawner;
-        private readonly IAgentSelector _selector;
-        private readonly IAgentCollection _collection;
+        public IAgentSpawner Spawner { get; private set; }
+        public IAgentSelector Selector { get; private set; }
+        public IAgentCollection Collection { get; private set; }
 
         public AgentsManager(IAgentSpawner spawner, IAgentSelector selector, IAgentCollection collection)
         {
-            _spawner = spawner;
-            _selector = selector;
-            _collection = collection;
+            Spawner = spawner;
+            Selector = selector;
+            Collection = collection;
         }
         
         public void Tick()
         {
-            _spawner.Tick();
+            Spawner.Tick();
         }
         
         public void Dispose()
@@ -32,16 +32,16 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
 
         public void Enable()
         {
-            _selector.Enable();
-            _spawner.SpawnInitialEnemies();
-            _spawner.StartSpawning();
+            Selector.Enable();
+            Spawner.SpawnInitialEnemies();
+            Spawner.StartSpawning();
         }
 
         public void Disable()
         {
-            _selector.Disable();
-            _spawner.StopSpawning();
-            _collection.Clear();
+            Selector.Disable();
+            Spawner.StopSpawning();
+            Collection.Clear();
         }
     }
 }

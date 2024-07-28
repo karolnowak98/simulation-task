@@ -2,7 +2,7 @@ using System;
 using GlassyCode.Simulation.Core.Utility.Extensions;
 using GlassyCode.Simulation.Core.Utility.Interfaces;
 using GlassyCode.Simulation.Game.Agents.Logic.Signals;
-using GlassyCode.Simulation.Game.Input;
+using GlassyCode.Simulation.Game.Global.Input;
 using UnityEngine;
 using Zenject;
 
@@ -17,9 +17,12 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
         private IAgent _selectedAgent;
         private bool _isEnabled;
 
+        public event Action<IAgent> OnAgentSelected;
+        public event Action OnAgentDeselected;
+        public event Action<int> OnSelectedAgentHealthChanged;
+
         public AgentSelector(SignalBus signalBus, IInputManager inputManager)
         {
-            _signalBus = signalBus;
             _inputManager = inputManager;
             _camera = CameraExtensions.GetMainCamera();
         }
@@ -72,9 +75,9 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
                     DeselectAgent();  
                     _selectedAgent = agent;
                     _selectedAgent.Select();
-                    _selectedAgent.OnHealthChanged += FireHealthChangedSignal;
+                    _selectedAgent.OnHealthChanged += OnHealthChanged;
                     _selectedAgent.OnDied += DeselectAgent;
-                    _signalBus.TryFire(new AgentSelectedSignal{ Agent = agent });
+                    OnAgentSelected?.Invoke(agent);
                 }
             }
         }
@@ -87,10 +90,10 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
             }
             
             _selectedAgent.Deselect();
-            _selectedAgent.OnHealthChanged -= FireHealthChangedSignal;
+            _selectedAgent.OnHealthChanged -= OnHealthChanged;
             _selectedAgent.OnDied -= DeselectAgent;
             _selectedAgent = null;
-            _signalBus.TryFire(new AgentDeselectedSignal());
+            OnAgentDeselected?.Invoke();
         }
         
         private void OnAgentDied(AgentDiedSignal signal)
@@ -103,9 +106,9 @@ namespace GlassyCode.Simulation.Game.Agents.Logic.Selector
             DeselectAgent();
         }
 
-        private void FireHealthChangedSignal(int health)
+        private void OnHealthChanged(int health)
         {
-            _signalBus.TryFire(new SelectedAgentHealthChangedSignal{ Health = health });
+            OnSelectedAgentHealthChanged?.Invoke(health);
         }
     }
 }

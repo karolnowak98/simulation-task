@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace GlassyCode.Simulation.Game.Input
+namespace GlassyCode.Simulation.Game.Global.Input
 {
     public sealed class InputManager : IInputManager, IInitializable, IDisposable
     {

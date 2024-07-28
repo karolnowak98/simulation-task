@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GlassyCode.Simulation.Game.Input
+namespace GlassyCode.Simulation.Game.Global.Input
 {
     public interface IInputManager
     {

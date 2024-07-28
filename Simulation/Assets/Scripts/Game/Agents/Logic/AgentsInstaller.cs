@@ -58,9 +58,6 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
         {
             Container.DeclareSignal<AgentSpawnedSignal>();
             Container.DeclareSignal<AgentDiedSignal>();
-            Container.DeclareSignal<AgentSelectedSignal>();
-            Container.DeclareSignal<AgentDeselectedSignal>();
-            Container.DeclareSignal<SelectedAgentHealthChangedSignal>();
         }
     }
 }

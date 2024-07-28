@@ -1,4 +1,4 @@
-namespace GlassyCode.Simulation.Game.Static
+namespace GlassyCode.Simulation.Game.Global.Static
 {
     public static class MenuNames
     {

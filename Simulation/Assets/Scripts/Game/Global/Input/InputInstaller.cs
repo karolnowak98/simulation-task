@@ -1,7 +1,7 @@
 ﻿using System;
 using Zenject;
 
-namespace GlassyCode.Simulation.Game.Input
+namespace GlassyCode.Simulation.Game.Global.Input
 {
     public sealed class InputInstaller : MonoInstaller
     {
