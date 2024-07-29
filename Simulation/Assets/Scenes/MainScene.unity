@@ -312,6 +312,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110851608786016171, guid: b4fdbc20c33fba345b463701a1770b77, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 110851608786016171, guid: b4fdbc20c33fba345b463701a1770b77, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 2365164249594088821, guid: b4fdbc20c33fba345b463701a1770b77, type: 3}
       propertyPath: <SpawnerArea>k__BackingField
       value: 

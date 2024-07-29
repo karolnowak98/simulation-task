@@ -18,7 +18,6 @@ namespace GlassyCode.Simulation.Game.Agents.Logic
 
         [Inject] private SignalBus _signalBus;
         private Rigidbody _rb;
-
         private int _health;
 
         public int Health
